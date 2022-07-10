@@ -1,3 +1,9 @@
+FROM golang:1.18 AS build
+WORKDIR /tmp 
+COPY /mygo/ .
+RUN GOOS=linux go build -a -installsuffix cgo -o app . && chmod +x ./app
+
+
 FROM docker:dind
-RUN apt-get update && apt-get install -y golang-go
-ADD ./mygo/ . 
+COPY --from=build /tmp/app .
+CMD [ "./app" ]
