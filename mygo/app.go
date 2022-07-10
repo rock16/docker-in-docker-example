@@ -29,7 +29,7 @@ func main() {
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",
-		Cmd:   []string{"echo", "hello world"},
+		Cmd:   []string{"echo", "hello docker in docker"},
 		Tty:   false,
 	}, nil, nil, nil, "")
 	if err != nil {
